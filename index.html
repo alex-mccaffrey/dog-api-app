@@ -14,11 +14,12 @@
         <h1>Dog API App Assignment</h1>
 
         <form>
-
-            <input type="submit" is='submit' value="Show me the dogs!">
+            <label for="numDogs">Number of dogs to display:</label><br>
+            <input type="text" id="numDogs" name="numDogs" value="3"><br>
+            <input type="submit" id='submit' value="Show me the dogs!">
         </form>
 
-        <section class="results hidden">
+        <section class="images hidden">
           <h2>Doggies!</h2>
           <img class="results-img" alt="placeholder">
         </section>
