@@ -1,7 +1,6 @@
 'use strict';
 
 function getDogImages(inputValue) {
-    console.log('getting images');
     let dogsApi = `https://dog.ceo/api/breeds/image/random/${inputValue}`;
     fetch(dogsApi)
       .then(response => response.json())
@@ -14,7 +13,7 @@ function getDogImages(inputValue) {
     console.log(responseJson);
     let arrayOfImg = responseJson.message;
     let display = getImages(arrayOfImg); 
-    $('.results-img').replaceWith(display);
+    $('.results-img').html(display);
     $('.images').removeClass('hidden');
   }
 
@@ -29,11 +28,9 @@ function getDogImages(inputValue) {
 
   function userSubmit() {
     $('form').submit( event => {
-        console.log('submitting');
       event.preventDefault();
       let inputValue = $('#numDogs').val();
       getDogImages(inputValue);
-      console.log(inputValue);
     });
   }
 
