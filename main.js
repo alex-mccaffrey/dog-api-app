@@ -1,35 +1,39 @@
-function getDogImages() {
+'use strict';
+
+function getDogImages(inputValue) {
     console.log('getting images');
-    let dogsApi = 'https://dog.ceo/api/breeds/image/random/' +numberOfImages();
+    let dogsApi = `https://dog.ceo/api/breeds/image/random/${inputValue}`;
     fetch(dogsApi)
       .then(response => response.json())
-      .then(responseJson => displayImages(responseJson))
+      .then(responseJson => displayResults(responseJson))
       .catch(error => alert('Something went wrong. Try again later.'));
   }
 
-  function numberOfImages(){
-     let number = document.getElementById('numDogs').value;
-     console.log(number);
-     return number;
-  }
 
-  function displayImages(responseJson) {
+  function displayResults(responseJson) {
     console.log(responseJson);
-    let dogPics = [];
-    for (i=0; i<responseJson.message.length; i++){
-        dogPics.push(`<img src="${responseJson.message[i]}" class="results-img">`);
-    $('.results-img').replaceWith(dogPics)
-    }
+    let arrayOfImg = responseJson.message;
+    let display = getImages(arrayOfImg); 
+    $('.results-img').replaceWith(display);
     $('.images').removeClass('hidden');
   }
 
+  function getImages(arrayOfImg){
+    let valueToReturn = ''; 
+    for (let i = 0; i < arrayOfImg.length; i++){
+      valueToReturn += `<img src="${arrayOfImg[i]}" class="results-img">`;
+    } 
+    return valueToReturn;
+}
 
 
   function userSubmit() {
     $('form').submit( event => {
         console.log('submitting');
       event.preventDefault();
-      getDogImages();
+      let inputValue = $('#numDogs').val();
+      getDogImages(inputValue);
+      console.log(inputValue);
     });
   }
 
